@@ -4,6 +4,7 @@ char number[3][3]={{'1','2','3'}, {'4','5','6'}, {'7', '8', '9'}};
 int row, col;
 int choice;
 char turn='X';
+bool draw= false;
 //display table
 void display_table(){
     system("cls");
@@ -68,10 +69,47 @@ void Turn(){
         goto choice_again;
     }
 }
+
+//game condtion
+bool gameover(){
+    //win
+    for(int i=0; i<3; i++){
+        if((number[i][0]==number[i][1] && number[i][0]==number[i][2])||(number[0][i]==number[1][i] && number[0][i]==number[2][i])){
+            return false;
+        }
+        if((number[0][0]==number[1][1] && number[0][0]==number[2][2])||(number[0][2]==number[1][1] && number[0][2]==number[2][0])){
+            return false;
+        }
+    }
+    //game is playing
+    for(int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            if(number[i][j]!='X' && number[i][j]!='O'){
+                return true;
+            }
+        }
+    }
+
+    //draw
+    draw = true;
+    return false;
+
+}
 //main
 main(){
-    while(true){
+    while(gameover()){
         display_table();
         Turn();
+        display_table();
+    }
+
+    if(turn =='X' && draw== false){
+        cout<<"\nCongratulation player2 [O] win the watch";
+    }
+    else if(turn =='O' && draw== false){
+        cout<<"\nCongratulation player1 [X] win the watch";
+    }
+    else{
+        cout<<"\nGame draw";
     }
 }
