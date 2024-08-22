@@ -55,13 +55,17 @@ void Turn(){
             cout<<"\nInvalid Input\n";
             goto choice_again;
     }
-    if(turn=='X'){
+    if(turn=='X' && number[row][col]!='X' && number[row][col]!='O'){
         number[row][col]='X';
         turn='O';
     }
-    else if(turn=='O'){
+    else if(turn=='O' && number[row][col]!='X' && number[row][col]!='O'){
         number[row][col]='O';
         turn='X';
+    }
+    else{
+        cout<<"\nThis place is occupied try again\n";
+        goto choice_again;
     }
 }
 //main
